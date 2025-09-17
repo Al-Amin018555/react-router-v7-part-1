@@ -46,7 +46,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'users2',
-        element: <Suspense fallback={<span>Loading...</span>}>
+        // promise resolve (data loading) howar aag projonto Suspense er fallback loading show korbe
+        element: <Suspense fallback={<span>Loading...</span>}> 
           <Users2 usersPromise={usersPromise}></Users2>
         </Suspense>
       }
