@@ -47,12 +47,18 @@ const router = createBrowserRouter([
       {
         path: 'users2',
         // promise resolve (data loading) howar aag projonto Suspense er fallback loading show korbe
-        element: <Suspense fallback={<span>Loading...</span>}> 
+        element: <Suspense fallback={<span>Loading...</span>}>
           <Users2 usersPromise={usersPromise}></Users2>
         </Suspense>
-      }
+      },
+
     ],
+  },
+  {
+    path: "*",
+    element: <div><h2>Not found: 404 Status</h2></div>
   }
+
 ]);
 
 createRoot(document.getElementById('root')).render(
