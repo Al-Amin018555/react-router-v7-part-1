@@ -1,9 +1,10 @@
 import { Suspense, useState } from "react";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import UserDetails2 from "../UserDetails2/UserDetails2";
 
 const User = ({ user }) => {
     const [showInfo, setShowInfo] = useState(false);
+    const [vistiHome, setVisitHome] = useState(false);
     const { id, name, email, phone } = user;
 
     const userPromise = fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then(res => res.json())
@@ -13,6 +14,11 @@ const User = ({ user }) => {
         borderRadius: '10px',
         padding: '5px',
     }
+
+    if(vistiHome){
+        return <Navigate to="/"></Navigate>
+    }
+    
     return (
         <div style={userStyle}>
             <h3>{name}</h3>
@@ -23,10 +29,11 @@ const User = ({ user }) => {
                 {showInfo ? 'Hide' : 'Show'} Info</button>
 
             {
-                showInfo && <Suspense fallback={ <span>Loading...</span> }>
+                showInfo && <Suspense fallback={<span>Loading...</span>}>
                     <UserDetails2 userPromise={userPromise}></UserDetails2>
                 </Suspense>
             }
+            <button onClick={()=> setVisitHome(true)}>Visit Home</button>
         </div>
     );
 };
